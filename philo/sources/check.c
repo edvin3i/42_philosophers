@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 12:07:06 by gbreana           #+#    #+#             */
-/*   Updated: 2022/06/28 23:43:17 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 03:44:04 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	check_input(int argc, char **argv)
 		error("Wrong number of arguments.");
 		return (1);
 	}
-		
 	i = 0;
 	while (++i < argc)
 	{
@@ -30,10 +29,10 @@ int	check_input(int argc, char **argv)
 		while (++j < ft_strlen(argv[i]))
 		{
 			if (!ft_isdigit(argv[i][j]))
-				{
-					error("Some argument(s) is not a number.");
-					return (1);
-				}
+			{
+				error("Some argument(s) is not a number.");
+				return (1);
+			}
 		}
 	}
 	return (0);

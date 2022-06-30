@@ -6,17 +6,18 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:19:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/06/30 15:22:05 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 03:46:02 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-/*
-void	ft_usleep(int time)
+
+void	ft_usleep(long long time, t_philo *philo)
 {
 	struct timeval	start;
 	struct timeval	now;
 
+	(void)philo;
 	gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
 	while ((((now.tv_sec - start.tv_sec) * 1000) + \
@@ -26,15 +27,15 @@ void	ft_usleep(int time)
 		gettimeofday(&now, NULL);
 	}
 }
-*/
 
-time_t	get_time(struct timeval start_time)
+long long	get_time(void)
 {
-	struct timeval	tval;
+	struct timeval	tm;
+	long long		now;
 
-	gettimeofday(&tval, NULL);
-	return ((tval.tv_sec - start_time.tv_sec) * 1000000
-		+ tval.tv_usec - start_time.tv_usec);
+	gettimeofday (&tm, NULL);
+	now = ((tm.tv_sec * 1000) + (tm.tv_usec / 1000));
+	return (now);
 }
 
 int	error(char *message)
@@ -45,11 +46,9 @@ int	error(char *message)
 
 void	ph_printf(t_philo *philo, char *str)
 {
-	struct timeval start_time;
-
-	start_time = philo->params->start_time;
 	pthread_mutex_lock(&philo->params->ph_printf);
 	if (!philo->params->is_died)
-		printf("%010ld    %d %s\n", get_time(start_time), philo->id, str);
+		printf("%010lld %d %s\n", get_time() - \
+				philo->params->start_time, philo->id, str);
 	pthread_mutex_unlock(&philo->params->ph_printf);
 }

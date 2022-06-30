@@ -6,7 +6,7 @@
 #    By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/20 08:25:42 by gbreana           #+#    #+#              #
-#    Updated: 2022/06/30 14:22:08 by gbreana          ###   ########.fr        #
+#    Updated: 2022/07/01 03:59:06 by gbreana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ MOBJS		=	$(patsubst %.c,%.o,$(MSRC))
 MDEPS		=	$(patsubst %.c,%.d,$(MSRC))
 
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -MD #-fsanitize=thread -g
+CFLAGS		=	-Wall -Werror -Wextra -MD -pthread -g# -fsanitize=thread
 RM			=	rm -rf
 
 override		OBJS_ALL ?= $(MOBJS)
 override		DEP_ALL ?= $(DEPS)
 
 $(MDIR)%.o:		$(MDIR)%.c Makefile include/philo.h
-				$(CC) $(CFLAGS) -Imlx -I $(INCLM) -c $< -o ${<:.c=.o}
+				$(CC) $(CFLAGS) -I $(INCLM) -c $< -o ${<:.c=.o}
 
 all:			$(LIBFT) $(MLXLIB) $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 20:30:59 by gbreana           #+#    #+#             */
-/*   Updated: 2022/06/30 14:17:51 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 03:50:29 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <string.h>
 # include <sys/time.h>
 
-typedef pthread_mutex_t t_mutex;
-typedef struct s_params t_params;
-typedef	struct s_philo t_philo;
+typedef pthread_mutex_t	t_mutex;
+typedef struct s_params	t_params;
+typedef struct s_philo	t_philo;
 
 /*
 	Structures
@@ -38,7 +38,7 @@ typedef struct s_params
 	int				num_meals;
 	int				nm_flag;
 	int				is_died;
-	struct	timeval	start_time;
+	long long		start_time;
 	t_mutex			*forks;
 	t_mutex			ph_printf;
 	t_philo			*philos;
@@ -49,7 +49,7 @@ typedef struct s_philo
 	int				id;
 	int				count_meals;
 	int				flag_death;
-	struct	timeval	time_last_meal;
+	long long		time_last_meal;
 	t_mutex			*l_fork;
 	t_mutex			*r_fork;
 	pthread_t		thread;
@@ -58,18 +58,18 @@ typedef struct s_philo
 /*
 	Utils
 */
-int		ft_isspace(int c);
-int		ft_isdigit(int c);
-int		ft_strlen(const char *str);
-long	ft_atoi(const char *str);
-int		error(char *message);
-void	ft_usleep(int time);
-void	ph_printf(t_philo *philo, char *str);
-time_t	get_time(struct timeval start_time);
+int			ft_isspace(int c);
+int			ft_isdigit(int c);
+int			ft_strlen(const char *str);
+long		ft_atoi(const char *str);
+int			error(char *message);
+void		ft_usleep(long long time, t_philo *philo);
+void		ph_printf(t_philo *philo, char *str);
+long long	get_time(void);
 /*
 	Functions for input check
 */
-int		check_input(int argc, char **argv);
+int			check_input(int argc, char **argv);
 /*
 	Initialisation
 */
@@ -80,13 +80,13 @@ int			start(t_params *params);
 /*
 	Routines
 */
-void	*main_routine(void *philo);
-void    *ph_monitor(void *philo);
-void	ph_routine(t_philo *philo);
+void		*main_routine(void *philo);
+void		*ph_monitor(void *philo);
+void		ph_routine(t_philo *philo);
 /*
 	Free and destroy
 */
-void	ph_kill(t_philo *philo);
-void	ph_free(t_params *params);
+void		ph_kill(t_philo *philo);
+void		ph_free(t_params *params);
 
 #endif
