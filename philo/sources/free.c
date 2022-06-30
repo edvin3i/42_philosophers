@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 12:07:06 by gbreana           #+#    #+#             */
-/*   Updated: 2022/06/28 23:43:17 by gbreana          ###   ########.fr       */
+/*   Created: 2022/06/13 00:19:38 by gbreana           #+#    #+#             */
+/*   Updated: 2022/06/30 02:07:08 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	check_input(int argc, char **argv)
+void	ph_free(t_params *params)
 {
-	int	i;
-	int	j;
+    int i;
 
-	if (argc < 5 || argc > 6)
-	{
-		error("Wrong number of arguments.");
-		return (1);
-	}
-		
-	i = 0;
-	while (++i < argc)
-	{
-		j = -1;
-		while (++j < ft_strlen(argv[i]))
-		{
-			if (!ft_isdigit(argv[i][j]))
-				{
-					error("Some argument(s) is not a number.");
-					return (1);
-				}
-		}
-	}
-	return (0);
+    i = -1;
+    while (++i < params->num_philos)
+        pthread_mutex_destroy(&params->forks[i]);
 }

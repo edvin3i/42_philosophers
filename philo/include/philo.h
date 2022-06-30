@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 20:30:59 by gbreana           #+#    #+#             */
-/*   Updated: 2022/06/20 14:50:36 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:17:51 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,42 @@
 # include <limits.h>
 # include <pthread.h>
 # include <time.h>
+# include <string.h>
 # include <sys/time.h>
+
+typedef pthread_mutex_t t_mutex;
+typedef struct s_params t_params;
+typedef	struct s_philo t_philo;
+
 /*
 	Structures
 */
-typedef struct s_philo
+typedef struct s_params
 {
-	int				id;
+	int				num_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				count_meal;
-	long			time_start;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
-	
-	
-	
-}	t_philo;
-
-typedef struct s_params
-{
-	int		num_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		num_meals;
-	time_t	start_time;
-	int		is_end;
-	mutex	
+	int				num_meals;
+	int				nm_flag;
+	int				is_died;
+	struct	timeval	start_time;
+	t_mutex			*forks;
+	t_mutex			ph_printf;
+	t_philo			*philos;
 }	t_params;
+
+typedef struct s_philo
+{
+	int				id;
+	int				count_meals;
+	int				flag_death;
+	struct	timeval	time_last_meal;
+	t_mutex			*l_fork;
+	t_mutex			*r_fork;
+	pthread_t		thread;
+	t_params		*params;
+}	t_philo;
 /*
 	Utils
 */
@@ -58,6 +64,8 @@ int		ft_strlen(const char *str);
 long	ft_atoi(const char *str);
 int		error(char *message);
 void	ft_usleep(int time);
+void	ph_printf(t_philo *philo, char *str);
+time_t	get_time(struct timeval start_time);
 /*
 	Functions for input check
 */
@@ -65,7 +73,20 @@ int		check_input(int argc, char **argv);
 /*
 	Initialisation
 */
-void	init_params(int argc, char **argv);
-void	init_philo(int argc, char **argv);
+t_params	*init_params(int argc, char **argv);
+int			init_forks(t_params *params);
+int			init_philos(t_params *params);
+int			start(t_params *params);
+/*
+	Routines
+*/
+void	*main_routine(void *philo);
+void    *ph_monitor(void *philo);
+void	ph_routine(t_philo *philo);
+/*
+	Free and destroy
+*/
+void	ph_kill(t_philo *philo);
+void	ph_free(t_params *params);
 
 #endif
