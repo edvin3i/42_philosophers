@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 12:07:06 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 19:51:31 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 16:07:18 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
-
-static int	check_args_num(int argc)
-{
-	if (argc < 5 || argc > 6)
-	{
-		error("Wrong number of arguments.");
-		return (1);
-	}
-	return (0);
-}
+#include "../include/philo_bonus.h"
 
 int	check_input(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	if (check_args_num(argc))
+	if (argc < 5 || argc > 6)
+	{
+		error("Wrong number of arguments.");
 		return (1);
+	}
 	i = 0;
 	while (++i < argc)
 	{
@@ -40,11 +33,6 @@ int	check_input(int argc, char **argv)
 				error("Some argument(s) is not a number.");
 				return (1);
 			}
-		}
-		if (ft_atoi(argv[i]) <= 0)
-		{
-			error("Some argument is equal or less then zero.");
-			return (1);
 		}
 	}
 	return (0);

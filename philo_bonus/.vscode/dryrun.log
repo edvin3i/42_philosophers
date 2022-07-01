@@ -1,0 +1,18 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/edvin/school/cursus/42_philosophers/philo_bonus'
+ 
+make: *** No rule to make target `sources/main_bonus.o', needed by `philo_bonus'.
+
+make: *** No rule to make target `sources/check_bonus.o', needed by `philo_bonus'.
+
+make: *** No rule to make target `sources/utils1_bonus.o', needed by `philo_bonus'.
+
+make: *** No rule to make target `sources/utils2_bonus.o', needed by `philo_bonus'.
+make: *** No rule to make target `sources/init_bonus.o', needed by `philo_bonus'.
+
+make: *** No rule to make target `sources/routines_bonus.o', needed by `philo_bonus'.
+make: *** No rule to make target `sources/death_bonus.o', needed by `philo_bonus'.
+make: *** No rule to make target `sources/free_bonus.o', needed by `philo_bonus'.
+
+make: Leaving directory `/Users/edvin/school/cursus/42_philosophers/philo_bonus'
+ 

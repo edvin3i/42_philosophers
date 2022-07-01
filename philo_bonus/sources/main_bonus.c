@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:34:32 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 20:13:53 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 16:09:20 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../include/philo_bonus.h"
 
 int	start(t_params *params)
 {
@@ -27,7 +27,6 @@ int	start(t_params *params)
 	}
 	pthread_create(&mon_thread, NULL, &ph_monitor, params->philos);
 	pthread_join(mon_thread, NULL);
-	//pthread_detach(mon_thread);
 	i = -1;
 	while (++i < params->num_philos)
 		pthread_join(params->philos[i].thread, NULL);

@@ -6,14 +6,18 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `sources/main_bonus.o', needed by `philo_bonus'.  Stop.
 
-# Make data base, printed on Fri Jul  1 20:21:04 2022
+
+# Make data base, printed on Fri Jul  1 16:06:33 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
+ 
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
@@ -32,15 +36,23 @@ PLATFORMIO_CALLER = vscode
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/edvin/school/cursus/42_philosophers
+CURDIR := /Users/edvin/school/cursus/42_philosophers/philo_bonus
 # makefile
 SHELL = /bin/sh
+# makefile (from `Makefile', line 31)
+RM = rm -rf
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile
-MAKEFILE_LIST := 
+# makefile (from `Makefile', line 30)
+CFLAGS = -Wall -Werror -Wextra -MD -g 
+# makefile (from `Makefile', line 27)
+MDEPS = $(patsubst %.c,%.d,$(MSRC))
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# `override' directive (from `Makefile', line 33)
+OBJS_ALL = $(MOBJS)
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
@@ -48,9 +60,9 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/tn/yrngk4r957d6qx82krd5nlgr0000gn/T/vscode-ipc-1b54c531-bac0-4c01-95e1-bcfdbf422f57.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/tn/yrngk4r957d6qx82krd5nlgr0000gn/T/vscode-ipc-9bf1f6d8-bb5a-4d36-a625-3b07f0147aa3.sock
 # environment
-VSCODE_CWD = /Users/edvin/school/cursus/42_philosophers
+VSCODE_CWD = /Users/edvin/school/cursus/42_philosophers/philo_bonus
 # environment
 NO_PROXY = 127.0.0.1
 # environment
@@ -68,14 +80,19 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Cybv5up6JB/Listeners
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/edvin/school/cursus/42_philosophers
+PWD = /Users/edvin/school/cursus/42_philosophers/philo_bonus
+# `override' directive (from `Makefile', line 34)
+DEP_ALL = $(DEPS)
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/edvin
+# makefile (from `Makefile', line 19)
+MFLS = main_bonus.c check_bonus.c utils1_bonus.c utils2_bonus.c init_bonus.c routines_bonus.c death_bonus.c free_bonus.c
 # default
+ 
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
 VSCODE_CLI = 1
@@ -92,7 +109,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-PLATFORMIO_PATH = /Users/edvin/.platformio/python3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/opt/fzf/bin
+PLATFORMIO_PATH = /Users/edvin/.platformio/penv/bin:/Users/edvin/.platformio/penv:/Users/edvin/.platformio/python3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/opt/fzf/bin
 # environment
 COLORTERM = truecolor
 # default
@@ -101,26 +118,39 @@ MAKE = $(MAKE_COMMAND)
 LC_TERMINAL = iTerm2
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/opt/fzf/bin
+# makefile (from `Makefile', line 17)
+MDIR = sources/
 # environment
 SHLVL = 3
 # environment
 XPC_FLAGS = 0x0
+# makefile (from `Makefile', line 29)
+CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = edvin
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
 # default
 MAKECMDGOALS := all
 # environment
 TERM_SESSION_ID = w0t0p0:6106D83E-1E61-4711-AF79-F7EC3F6BBBF8
+# makefile (from `Makefile', line 13)
+NAME = philo_bonus
+# makefile (from `Makefile', line 23)
+MSRC = $(addprefix $(MDIR), $(MFLS))
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
+ 
+# makefile (from `Makefile', line 25)
+MOBJS = $(patsubst %.c,%.o,$(MSRC))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 15)
+INCLM = include/philo_bonus.h
 # environment
 TERM_PROGRAM = iTerm.app
 # default
@@ -140,7 +170,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 3.4.15
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.65888188.65888194.7827AF3E-10C2-4088-BF2E-28841C393DE0
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.65888188.65888194.188C5E4C-888A-490A-8D57-2A799F0FB371
 # environment
 LC_TERMINAL_VERSION = 3.4.15
 # automatic
@@ -162,6 +192,7 @@ MAKEFILES :=
 # environment
 ITERM_PROFILE = Default
 # environment
+ 
 PAGER = less
 # environment
 LC_ALL = C
@@ -188,7 +219,7 @@ _P9K_TTY = /dev/ttys000
 # environment
 VSCODE_PID = 84852
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=7/109=6%
+# Load=100/1024=10%, Rehash=0, Collisions=11/134=8%
 
 # Pattern-specific Variable Values
 
@@ -196,23 +227,61 @@ VSCODE_PID = 84852
 
 # Directories
 
-# . (device 16777220, inode 67855576): 8 files, no impossibilities.
+# . (device 16777220, inode 67911847): 7 files, no impossibilities.
+# sources (device 16777220, inode 67914279): 10 files, 1 impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 17 files, 1 impossibilities in 2 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+sources/%.o: sources/%.c Makefile include/philo.h
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFLAGS) -I $(INCLM) -c $< -o ${<:.c=.o}
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
 # Not a target:
-all:
+sources/death_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: philo_bonus
+#  Phony target (prerequisite of .PHONY).
 #  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+sources/utils2_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all clean fclean re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+sources/routines_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+sources/main_bonus.o:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
+ 
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
@@ -223,23 +292,27 @@ all:
 
 # Not a target:
 Makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-01 16:06:25
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 48):
+	$(RM) $(NAME)
+	
+
+# Not a target:
+sources/free_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -247,31 +320,62 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-GNUmakefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+#  File has not been updated.
+
+# Not a target:
+sources/init_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 45):
+	$(RM) $(MOBJS) $(MDEPS)
+	
+
+# Not a target:
+sources/check_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+philo_bonus: sources/main_bonus.o sources/check_bonus.o sources/utils1_bonus.o sources/utils2_bonus.o sources/init_bonus.o sources/routines_bonus.o sources/death_bonus.o sources/free_bonus.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 42):
+	@$(CC) $(MOBJS) -o $@
+	
+
+# Not a target:
+sources/utils1_bonus.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=17/1024=2%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0
-# # of strcache buffers: 0
-# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
-# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul  1 20:21:04 2022
+# Finished Make data base on Fri Jul  1 16:06:33 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-

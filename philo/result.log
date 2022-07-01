@@ -1,0 +1,43 @@
+philo 1 120 60 60
+FORMAT ERROR: wrong format
+0000000000 1 has taken a fork
+
+
+philo 2 120 60 60
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 3 120 60 60
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 4 120 60 60
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 5 120 60 60
+FORMAT ERROR: wrong format
+0000000001 2 has taken a fork
+
+
+philo 6 120 60 60
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 7 120 60 60
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 4 410 200 200
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork
+
+
+philo 4 310 200 100
+FORMAT ERROR: wrong format
+0000000000 2 has taken a fork

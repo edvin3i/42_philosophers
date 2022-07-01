@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   death.c                                            :+:      :+:    :+:   */
+/*   death_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 01:18:52 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 20:25:19 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 16:09:08 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../include/philo_bonus.h"
 
 void	ph_kill(t_philo *philo)
 {
@@ -18,9 +18,9 @@ void	ph_kill(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->params->ph_printf);
 		philo->params->is_died = 1;
-		printf("%010lld %d %s\n", \
+		printf("%lld %d %s\n", \
 				get_time() - philo->params->start_time, \
-				philo->id, "\e[41mdied\e[0m");
+				philo->id, "\e[41mis died\e[0m");
 	}
 	pthread_mutex_unlock(&philo->params->ph_printf);
 	pthread_mutex_unlock(&philo->mealtime);
