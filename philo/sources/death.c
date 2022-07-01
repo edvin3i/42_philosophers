@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 01:18:52 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 06:59:29 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 07:13:19 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ph_kill(t_philo *philo)
 {
-	
 	if (!philo->params->is_died)
 	{
-		pthread_mutex_lock(&philo->params->ph_printf);	
+		pthread_mutex_lock(&philo->params->ph_printf);
 		philo->params->is_died = 1;
-		printf("%lld %d %s\n", get_time() - philo->params->start_time, \
+		printf("%lld %d %s\n", \
+				get_time() - philo->params->start_time, \
 				philo->id, "\e[41mis died\e[0m");
 	}
 	pthread_mutex_unlock(&philo->params->ph_printf);
@@ -39,16 +39,15 @@ void	*ph_monitor(void *philos)
 		{	
 			pthread_mutex_lock(&p[i].mealtime);
 			if ((get_time() - p[i].time_last_meal) >= p[i].params->time_to_die)
-				{
-					ph_kill(&p[i]);
-				}			
+				ph_kill(&p[i]);
 			pthread_mutex_unlock(&p[i].mealtime);
 			pthread_mutex_lock(&p[i].mealtime);
-			if (p->params->nm_flag && (p[i].count_meals >= p->params->num_meals))
-				{
-					pthread_mutex_unlock(&p[i].mealtime);
-					return (NULL);
-				}
+			if (p->params->nm_flag && \
+				(p[i].count_meals >= p->params->num_meals))
+			{
+				pthread_mutex_unlock(&p[i].mealtime);
+				return (NULL);
+			}
 			pthread_mutex_unlock(&p[i].mealtime);
 		}
 	}
