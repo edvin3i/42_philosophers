@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:47:27 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 04:10:59 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 06:28:45 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	init_philos(t_params *params)
 		philos[i].r_fork = &params->forks[i + 1 % params->num_philos];
 		philos[i].params = params;
 		philos[i].count_meals = 0;
+		pthread_mutex_init(&philos[i].mealtime, NULL);
 	}
 	params->philos = philos;
 	return (0);

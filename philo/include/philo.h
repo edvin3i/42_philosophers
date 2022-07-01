@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 20:30:59 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 03:50:29 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 06:28:18 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_philo
 	long long		time_last_meal;
 	t_mutex			*l_fork;
 	t_mutex			*r_fork;
+	t_mutex			mealtime;
 	pthread_t		thread;
 	t_params		*params;
 }	t_philo;
