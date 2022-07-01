@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:34:32 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 06:37:15 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/01 07:45:26 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	start(t_params *params)
 				NULL, &main_routine, &params->philos[i]);
 	}
 	pthread_create(&mon_thread, NULL, &ph_monitor, params->philos);
-	pthread_detach(mon_thread);
+	pthread_join(mon_thread, NULL);
 	i = -1;
 	while (++i < params->num_philos)
 		pthread_join(params->philos[i].thread, NULL);
