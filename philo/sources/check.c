@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 12:07:06 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 19:51:31 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/02 00:58:17 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_input(int argc, char **argv)
 		}
 		if (ft_atoi(argv[i]) <= 0)
 		{
-			error("Some argument is equal or less then zero.");
+			error("Some argument is equal or less than zero.");
 			return (1);
 		}
 	}

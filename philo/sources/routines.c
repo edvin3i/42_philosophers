@@ -6,11 +6,17 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:30:40 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 21:20:49 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/02 01:09:32 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+static void	ph_fthought(t_philo *philo)
+{
+	ph_printf(philo, "is thinking");
+	ft_usleep(philo->params->time_to_die / 2, philo);
+}
 
 void	ph_routine(t_philo *philo)
 {
@@ -29,7 +35,6 @@ void	ph_routine(t_philo *philo)
 	ph_printf(philo, "is sleeping");
 	ft_usleep(philo->params->time_to_sleep, philo);
 	ph_printf(philo, "is thinking");
-	ft_usleep(philo->params->time_to_sleep, philo);
 	if (philo->params->nm_flag && \
 		(philo->count_meals >= philo->params->num_meals))
 		return ;
@@ -47,8 +52,8 @@ void	*main_routine(void *philo)
 		ft_usleep(p->params->time_to_die, philo);
 		return (NULL);
 	}
-	if (p->id % 2 == 1)
-		ft_usleep(p->params->time_to_die / 2, philo);
+	if (p->id % 2)
+		ph_fthought(philo);
 	pthread_mutex_lock(&p->mealtime);
 	while (!p->params->is_died && !(p->params->nm_flag \
 			&& p->count_meals >= p->params->num_meals))

@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:19:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 20:25:05 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/02 00:52:58 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_usleep(long long time, t_philo *philo)
 	while ((((now.tv_sec - start.tv_sec) * 1000) + \
 		(now.tv_usec - start.tv_usec) / 1000) < time)
 	{
-		usleep(500);
+		usleep(100);
 		gettimeofday(&now, NULL);
 	}
 }
