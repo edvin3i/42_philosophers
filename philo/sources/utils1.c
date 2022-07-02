@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:19:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/02 00:52:58 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/03 03:03:28 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_usleep(long long time, t_philo *philo)
 	struct timeval	start;
 	struct timeval	now;
 
-	(void)philo;
 	gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
-	while ((((now.tv_sec - start.tv_sec) * 1000) + \
-		(now.tv_usec - start.tv_usec) / 1000) < time)
+	while (((((now.tv_sec - start.tv_sec) * 1000) + \
+		(now.tv_usec - start.tv_usec) / 1000) < time) \
+		&& !philo->params->is_died)
 	{
 		usleep(100);
 		gettimeofday(&now, NULL);

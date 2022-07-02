@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:30:40 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/02 01:09:32 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/03 03:22:39 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ph_fthought(t_philo *philo)
 
 void	ph_routine(t_philo *philo)
 {
+	if ((get_time() - philo->time_last_meal) >= philo->params->time_to_die)
+		ph_kill(philo);
 	pthread_mutex_lock(philo->l_fork);
 	ph_printf(philo, "has taken a fork");
 	pthread_mutex_lock(philo->r_fork);

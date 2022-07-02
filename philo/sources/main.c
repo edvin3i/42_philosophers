@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:34:32 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/02 01:23:05 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/03 03:22:53 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int	main(int argc, char **argv)
 	if (check_input(argc, argv))
 		return (1);
 	params = init_params(argc, argv);
-	init_forks(params);
-	init_philos(params);
-	start(params);
+	if (init_forks(params) || init_philos(params) || start(params))
+		return (1);
 	ph_free(params);
 	return (0);
 }
