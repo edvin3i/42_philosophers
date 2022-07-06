@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 20:30:59 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 16:19:28 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/06 17:14:23 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ typedef struct s_philo	t_philo;
 */
 typedef struct s_params
 {
+	int	nothing;
+}	t_params;
+
+typedef struct s_philo
+{
+	int				id;
+	pid_t			*pid;
 	int				num_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_meals;
 	int				nm_flag;
-	int				is_died;
-	long long		start_time;
-	t_philo			*philos;
-}	t_params;
-
-typedef struct s_philo
-{
-	int				id;
 	int				count_meals;
 	int				flag_death;
+	int				is_died;
+	long long		start_time;
 	long long		time_last_meal;
 	sem_t			*sem_fork;
-	sem_t			*sem_print;
-	sem_t			*sem_start;
-	t_params		*params;
+	sem_t			*sem_printf;
+	pthread_t		mon_thread;
 }	t_philo;
 /*
 	Utils
@@ -71,20 +71,21 @@ int			check_input(int argc, char **argv);
 /*
 	Initialisation
 */
-t_params	*init_params(int argc, char **argv);
-int			init_forks(t_params *params);
-int			init_philos(t_params *params);
-int			start(t_params *params);
+t_philo		*init_philo(int argc, char **argv);
+int			ph_init_pids(t_philo *philo);
+int			start(t_philo *philo);
 /*
 	Routines
 */
-void		*main_routine(void *philo);
+int			main_routine(t_philo *philo);
 void		*ph_monitor(void *philo);
-void		ph_routine(t_philo *philo);
+int			ph_routine(t_philo *philo);
 /*
 	Free and destroy
 */
-void		ph_kill(t_philo *philo);
-void		ph_free(t_params *params);
+int			ph_kill(t_philo *philo);
+void		ph_unlink_all(void);
+void		ph_close_all(t_philo *philo);
+void		ph_free(t_philo *philo);
 
 #endif

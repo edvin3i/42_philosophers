@@ -6,57 +6,48 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:30:40 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 16:09:23 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/06 18:05:03 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-void	ph_routine(t_philo *philo)
+int	ph_routine(t_philo *philo)
 {
-	pthread_mutex_lock(philo->l_fork);
+	sem_wait(philo->sem_fork);
 	ph_printf(philo, "has taken a fork");
-	pthread_mutex_lock(philo->r_fork);
+	sem_wait(philo->sem_fork);
 	ph_printf(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->mealtime);
 	philo->count_meals++;
 	philo->time_last_meal = get_time();
-	pthread_mutex_unlock(&philo->mealtime);
 	ph_printf(philo, "is eating");
-	ft_usleep(philo->params->time_to_eat, philo);
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
-	if (philo->params->nm_flag && \
-		(philo->count_meals >= philo->params->num_meals))
-		return ;
+	ft_usleep(philo->time_to_eat, philo);
+	sem_post(philo->sem_fork);
+	sem_post(philo->sem_fork);
+	if (philo->nm_flag && \
+		(philo->count_meals >= philo->num_meals))
+		return (0);
 	ph_printf(philo, "is sleeping");
-	ft_usleep(philo->params->time_to_sleep, philo);
+	ft_usleep(philo->time_to_sleep, philo);
 	ph_printf(philo, "is thinking");
+	return (0);
 }
 
-void	*main_routine(void *philo)
+int	main_routine(t_philo *philo)
 {
 	t_philo	*p;
 
-	p = (t_philo *)philo;
-	if (p->params->num_philos == 1)
-	{
-		pthread_mutex_lock(p->l_fork);
-		ph_printf(p, "has taken a fork");
-		ft_usleep(p->params->time_to_die, philo);
-		return (NULL);
-	}
+	p = philo;
+	pthread_create(&philo->mon_thread, NULL, &ph_monitor, philo);
 	if (p->id % 2)
-		ft_usleep(p->params->time_to_die / 2, philo);
-	pthread_mutex_lock(&p->mealtime);
-	while (!p->params->is_died && !(p->params->nm_flag \
-			&& p->count_meals >= p->params->num_meals))
+		ft_usleep(p->time_to_die / 2, NULL);
+	while (1)
 	{
-		pthread_mutex_unlock(&p->mealtime);
-		ph_routine(p);
+		if (p->nm_flag && (p->count_meals >= p->num_meals))
+			break ;
+		if (ph_routine(philo))
+			break ;
 	}
-	pthread_mutex_unlock(&p->mealtime);
-	pthread_mutex_unlock(p->l_fork);
-	pthread_mutex_unlock(p->r_fork);
-	return (NULL);
+	pthread_join(p->mon_thread, NULL);
+	return (0);
 }

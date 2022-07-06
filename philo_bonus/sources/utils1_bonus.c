@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 00:19:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/01 16:09:26 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/06 17:06:02 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_usleep(long long time, t_philo *philo)
 	struct timeval	start;
 	struct timeval	now;
 
-	(void)philo;
 	gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
-	while ((((now.tv_sec - start.tv_sec) * 1000) + \
-		(now.tv_usec - start.tv_usec) / 1000) < time)
+	while (((((now.tv_sec - start.tv_sec) * 1000) + \
+		(now.tv_usec - start.tv_usec) / 1000) < time) \
+		&& !philo->is_died)
 	{
 		usleep(100);
 		gettimeofday(&now, NULL);
@@ -46,9 +46,9 @@ int	error(char *message)
 
 void	ph_printf(t_philo *philo, char *str)
 {
-	pthread_mutex_lock(&philo->params->ph_printf);
-	if (!philo->params->is_died)
+	sem_wait(philo->sem_printf);
+	if (!philo->is_died)
 		printf("%lld %d %s\n", get_time() - \
-				philo->params->start_time, philo->id, str);
-	pthread_mutex_unlock(&philo->params->ph_printf);
+				philo->start_time, philo->id, str);
+	sem_post(philo->sem_printf);
 }
