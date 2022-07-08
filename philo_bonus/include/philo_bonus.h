@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 20:30:59 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/06 17:14:23 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/08 07:00:31 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_params
 typedef struct s_philo
 {
 	int				id;
-	pid_t			*pid;
+	pid_t			*pids;
 	int				num_philos;
 	int				time_to_die;
 	int				time_to_eat;
@@ -46,11 +46,13 @@ typedef struct s_philo
 	int				nm_flag;
 	int				count_meals;
 	int				flag_death;
-	int				is_died;
+	int				flag_stop;
 	long long		start_time;
 	long long		time_last_meal;
+	sem_t			*sem_start;
 	sem_t			*sem_fork;
 	sem_t			*sem_printf;
+	sem_t			*sem_kill;
 	pthread_t		mon_thread;
 }	t_philo;
 /*
@@ -60,10 +62,12 @@ int			ft_isspace(int c);
 int			ft_isdigit(int c);
 int			ft_strlen(const char *str);
 long		ft_atoi(const char *str);
-int			error(char *message);
+void		error(char *message);
 void		ft_usleep(long long time, t_philo *philo);
 void		ph_printf(t_philo *philo, char *str);
 long long	get_time(void);
+void		ph_sem_post_n(sem_t *sem, int num);
+void		ph_wait_pids(pid_t	*pids, int num);
 /*
 	Functions for input check
 */
@@ -79,11 +83,13 @@ int			start(t_philo *philo);
 */
 int			main_routine(t_philo *philo);
 void		*ph_monitor(void *philo);
-int			ph_routine(t_philo *philo);
+pid_t		ph_wdog(t_philo *philo);
+void		ph_routine(t_philo *philo);
 /*
 	Free and destroy
 */
 int			ph_kill(t_philo *philo);
+void		ph_killall(t_philo *philo, int num);
 void		ph_unlink_all(void);
 void		ph_close_all(t_philo *philo);
 void		ph_free(t_philo *philo);
