@@ -53,6 +53,7 @@ dkms.conf
 
 # IDE
 .idea
+.vscode/
 
 # Others
 .DS_Store
